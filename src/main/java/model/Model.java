@@ -117,7 +117,10 @@ public class Model implements BoardGame<Coord> {
 		boolean bool = false;
 
 		// TODO : à compléter atelier 4 pour gérer les rafles 
-
+		boolean a = this.implementor.isPiecehere(toMovePieceCoord);
+		boolean b = this.implementor.getPieceColor(toMovePieceCoord) == this.currentGamerColor;
+		boolean c = Coord.coordonnees_valides(targetSquareCoord);
+		boolean d = !this.implementor.isPiecehere(targetSquareCoord);
 		bool = 	this.implementor.isPiecehere(toMovePieceCoord) 
 				&& this.implementor.getPieceColor(toMovePieceCoord) == this.currentGamerColor 
 				&& Coord.coordonnees_valides(targetSquareCoord) 

@@ -13,16 +13,15 @@ public class PawnModel implements PieceModel{
 
 	public PawnModel(Coord coord, PieceSquareColor pieceColor) {
 		super();
-
-		// TODO Atelier 1
-
+		this.coord = coord;
+		this.pieceColor = pieceColor;
 	}
 
 	@Override
 	public char getColonne() {
 		char colonne = ' ';
 		
-		// TODO Atelier 1
+		colonne = this.coord.getColonne();
 
 		return colonne;
 	}
@@ -31,7 +30,7 @@ public class PawnModel implements PieceModel{
 	public int getLigne() {
 		int ligne = -1;
 		
-		// TODO Atelier 1
+		ligne = this.coord.getLigne();
 
 		return ligne;
 	}
@@ -40,7 +39,8 @@ public class PawnModel implements PieceModel{
 	public boolean hasThisCoord(Coord coord) {
 		boolean hasThisCoord = false;
 		
-		// TODO Atelier 1
+		if(getColonne() == coord.getColonne() && getLigne() == coord.getLigne())
+			hasThisCoord = true;
 
 		return hasThisCoord;
 	}
@@ -49,7 +49,7 @@ public class PawnModel implements PieceModel{
 	public PieceSquareColor getPieceColor() {
 		PieceSquareColor color = null;
 		
-		// TODO Atelier 1
+		color = this.pieceColor;
 
 		return color;	
 	}
@@ -61,23 +61,33 @@ public class PawnModel implements PieceModel{
 	public String toString() {
 		String st = null;
 
-		// TODO Atelier 1
+		st = "["+this.coord.toString()+", "+this.pieceColor+"]";
 
 		return st;
 	}
 
 	@Override
 	public void move(Coord coord) {
-
-		// TODO Atelier 1
-
+		this.coord.setLigne(coord.getLigne());
+		this.coord.setColonne(coord.getColonne());
 	}
 
 	@Override
 	public boolean isMoveOk(Coord targetCoord, boolean isPieceToCapture) {
 		boolean ret = false;
+		int ascii = (int)getColonne() - (int)targetCoord.getColonne();
 
-		// TODO Atelier 1
+		if(Coord.coordonnees_valides(targetCoord))
+		{
+			if(isPieceToCapture && Math.abs(ascii) == 2)
+			{
+				ret = true;
+			}
+			if(!isPieceToCapture && Math.abs(ascii) == 1)
+			{
+				ret = true;
+			}
+		}
 
 		return ret;
 	}

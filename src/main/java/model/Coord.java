@@ -1,6 +1,7 @@
 package model;
 
 
+import java.util.Objects;
 
 /**
  * @author francoiseperrin
@@ -16,6 +17,14 @@ public class Coord implements Comparable<Coord>{
 	public Coord(char colonne, int ligne) {
 		super();
 		this.colonne = colonne;
+		this.ligne = ligne;
+	}
+
+	public void setColonne(char colonne) {
+		this.colonne = colonne;
+	}
+
+	public void setLigne(int ligne) {
 		this.ligne = ligne;
 	}
 
@@ -42,7 +51,10 @@ public class Coord implements Comparable<Coord>{
 
 		boolean ret = false;
 
-		// TODO Atelier 1
+		if((coord.colonne >= 'a' && coord.colonne < 'a' + MAX) && (coord.ligne > 1 && coord.ligne <= MAX))
+		{
+			ret = true;
+		}
 		
 		return ret;
 	}
@@ -60,10 +72,30 @@ public class Coord implements Comparable<Coord>{
 	@Override
 	public int compareTo(Coord o) {
 		int ret = 999;
-		
-		// TODO Atelier 1
+
+		int numCoord1 = (this.colonne - 'a') * MAX + this.ligne;
+		int numCoord2 = (o.colonne - 'a') * MAX + o.ligne;
+
+		if (numCoord1 < numCoord2) {
+			ret = -1;
+		} else if (numCoord1 > numCoord2) {
+			ret = 1;
+		} else
+			ret = 0;
 		
 		return ret ;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Coord coord = (Coord) o;
+		return colonne == coord.colonne && ligne == coord.ligne;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(colonne, ligne);
+	}
 }
