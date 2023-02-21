@@ -20,7 +20,7 @@ public class TestModel {
 		//////////////////////////////////
 
 		System.out.println("Test classe Coord");
-		Coord c1 = new Coord('a', 3);
+		Coord c1 = new Coord('a', 1);
 		Coord c2 = new Coord('a', 3);
 		System.out.println("MAX = " + Coord.MAX); // MAX = 10
 		System.out.println("c1 = " + c1);	// c1 = [7,a]
@@ -45,10 +45,10 @@ public class TestModel {
 		PieceModel pieceModel2 = new PawnModel(new Coord('b', 4), PieceSquareColor.WHITE);
 		PieceModel pieceModel3 = new PawnModel(new Coord('e', 7), PieceSquareColor.BLACK);
 		System.out.println("pieceModel1 = " + pieceModel1);	// [B[7,a]]
-							pieceModel1.move(new Coord('b', 6));
+							pieceModel1.move(new Coord('b', 8));
 		System.out.println("pieceModel1 = " + pieceModel1);	// [B[6,b]]
 		System.out.println("isMoveOk ('b',4) --> ('c',5) = "
-							+ pieceModel2.isMoveOk(new Coord('c',5),false)); // true : depl. de 1 case sans prise
+							+ pieceModel2.isMoveOk(new Coord('a',5),false)); // true : depl. de 1 case sans prise
 		System.out.println("isMoveOk ('e',7) --> ('d',6) = "
 							+ pieceModel3.isMoveOk(new Coord('d',6),false)); // true : depl. de 1 case sans prise
 							pieceModel2.move(new Coord('c', 5));

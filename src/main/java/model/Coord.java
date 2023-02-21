@@ -20,14 +20,6 @@ public class Coord implements Comparable<Coord>{
 		this.ligne = ligne;
 	}
 
-	public void setColonne(char colonne) {
-		this.colonne = colonne;
-	}
-
-	public void setLigne(int ligne) {
-		this.ligne = ligne;
-	}
-
 	public char getColonne() {
 		return colonne;
 	}
@@ -51,7 +43,7 @@ public class Coord implements Comparable<Coord>{
 
 		boolean ret = false;
 
-		if((coord.colonne >= 'a' && coord.colonne < 'a' + MAX) && (coord.ligne > 1 && coord.ligne <= MAX))
+		if((coord.colonne >= 'a' && coord.colonne < 'a' + MAX) && (coord.ligne > 0 && coord.ligne <= MAX))
 		{
 			ret = true;
 		}
@@ -91,7 +83,7 @@ public class Coord implements Comparable<Coord>{
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Coord coord = (Coord) o;
-		return colonne == coord.colonne && ligne == coord.ligne;
+		return this.colonne == coord.colonne && this.ligne == coord.ligne;
 	}
 
 	@Override

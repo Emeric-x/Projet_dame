@@ -10,11 +10,13 @@ public class PawnModel implements PieceModel{
 
 	private Coord coord;
 	private PieceSquareColor pieceColor;
+	private int direction;
 
 	public PawnModel(Coord coord, PieceSquareColor pieceColor) {
 		super();
 		this.coord = coord;
 		this.pieceColor = pieceColor;
+		this.direction = PieceSquareColor.BLACK.equals(this.getPieceColor()) ? -1 : 1;
 	}
 
 	@Override
@@ -68,25 +70,27 @@ public class PawnModel implements PieceModel{
 
 	@Override
 	public void move(Coord coord) {
-		this.coord.setLigne(coord.getLigne());
-		this.coord.setColonne(coord.getColonne());
+		this.coord = coord;
 	}
 
 	@Override
 	public boolean isMoveOk(Coord targetCoord, boolean isPieceToCapture) {
 		boolean ret = false;
-		int ascii = (int)getColonne() - (int)targetCoord.getColonne();
+		int col = (int)getColonne() - (int)targetCoord.getColonne();
+		int lig = (int)getLigne() - (int)targetCoord.getLigne();
 
 		if(Coord.coordonnees_valides(targetCoord))
 		{
-			if(isPieceToCapture && Math.abs(ascii) == 2)
-			{
-				ret = true;
-			}
-			if(!isPieceToCapture && Math.abs(ascii) == 1)
-			{
-				ret = true;
-			}
+				if(isPieceToCapture && Math.abs(col) == 2)
+				{
+					if((lig == 2 && this.getPieceColor() == PieceSquareColor.BLACK) || lig == -2 && this.getPieceColor() == PieceSquareColor.WHITE)
+						ret = true;
+				}
+				if(!isPieceToCapture && Math.abs(col) == 1)
+				{
+					if((lig == 1 && this.getPieceColor() == PieceSquareColor.BLACK) || lig == -1 && this.getPieceColor() == PieceSquareColor.WHITE)
+						ret = true;
+				}
 		}
 
 		return ret;
